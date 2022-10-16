@@ -132,6 +132,10 @@ def convert_frames_to_video(pathIn,pathOut,fps):
 
 def real_main(res_file_name):
     resFile = res_file_name
+    resFolderPath = os.path.join(os.getcwd(), "figure", "video_files", resFile)
+    if os.path.exists(resFolderPath):
+        shutil.rmtree(resFolderPath)
+    os.makedirs(resFolderPath)
 
     args = {
         "device_type": "cpu",
