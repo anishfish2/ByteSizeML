@@ -53,15 +53,15 @@ def build_model(model_arch_name: str, device: torch.device) -> nn.Module:
 
 
 def main(args):
-    device = choice_device(args.device_type)
+    device = choice_device(args["device_type"])
 
     # Initialize the model
-    g_model = build_model(args.model_arch_name, device)
-    print(f"Build {args.model_arch_name} model successfully.")
+    g_model = build_model(args["model_arch_name"], device)
+    print(f"Build {args['model_arch_name']} model successfully.")
 
     # Load model weights
-    g_model = load_state_dict(g_model, args.model_weights_path)
-    print(f"Load {args.model_arch_name} model weights {os.path.abspath(args.model_weights_path)} successfully.")
+    g_model = load_state_dict(g_model, args["model_weights_path"])
+    print(f"Load {args['model_arch_name']} model weights {os.path.abspath(args['model_weights_path'])} successfully.")
 
     # Start the verification mode of the model.
 
@@ -69,7 +69,7 @@ def main(args):
     timestart = time.perf_counter()
 
 
-    lr_tensors = imgproc.preprocess_one_image(args.inputs_path, device)
+    lr_tensors = imgproc.preprocess_one_image(args["inputs_path"], device)
     frame_array = []
     for i in range(len(lr_tensors)):
         # Use the model to generate super-resolved images
@@ -80,7 +80,7 @@ def main(args):
         sr_image = imgproc.tensor_to_image(sr_tensor, False, False)
         sr_image = cv2.cvtColor(sr_image, cv2.COLOR_RGB2BGR)
         
-        cv2.imwrite(args.output_path + "_" + str (i) + ".png", sr_image)
+        cv2.imwrite(args["output_path"] + "_" + str (i) + ".png", sr_image)
         #         img = cv2.imread(filename)
         #     height, width, layers = img.shape
         #     size = (width,height)
@@ -96,7 +96,7 @@ def main(args):
         out.write(frame_array[i])
     out.release()
     print(time.perf_counter() - timestart)
-    print(f"SR image save to {args.output_path}")
+    print(f"SR image save to {args['output_path']}")
 
 resFile = 'res2'
 resFolderPath = os.path.join(os.getcwd(), "figure", "video_files", resFile)
@@ -130,30 +130,16 @@ def convert_frames_to_video(pathIn,pathOut,fps):
 
     
 
+def real_main(res_file_name):
+    resFile = res_file_name
 
-if __name__ == "__main__":
-    
-    parser = argparse.ArgumentParser(description="Using the model generator super-resolution images.")
-    parser.add_argument("--model_arch_name",
-                        type=str,
-                        default="srresnet_x4")
-    parser.add_argument("--inputs_path",
-                        type=str,
-                        default="./figure/" + resFile + ".txt",
-                        help="Low-resolution image path.")
-    parser.add_argument("--output_path",
-                        type=str,
-                        default="./figure/video_files/" + resFile + '/' + resFile,
-                        help="Super-resolution image path.")
-    parser.add_argument("--model_weights_path",
-                        type=str,
-                        default="./results/SRGAN_x4-ImageNet-c71a4860.pth.tar",
-                        help="Model weights file path.")
-    parser.add_argument("--device_type",
-                        type=str,
-                        default="cpu",
-                        choices=["cpu", "cuda"])
-    args = parser.parse_args()
+    args = {
+        "device_type": "cpu",
+        "model_weights_path": "./results/SRGAN_x4-ImageNet-c71a4860.pth.tar",
+        "output_path": "./figure/video_files/" + resFile + '/' + resFile,
+        "inputs_path": "./figure/" + resFile + ".txt",
+        "model_arch_name": "srresnet_x4"
+    }
     #timestart = time.perf_counter()
     main(args)
 
@@ -162,3 +148,9 @@ if __name__ == "__main__":
     fps = 25.0
     convert_frames_to_video(pathIn, pathOut, fps)
     #print(time.perf_counter() - timestart)
+
+
+if __name__ == "__main__":
+    real_main("res2")
+    
+    
