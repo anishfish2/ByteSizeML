@@ -21,3 +21,4 @@
 
 Frontend for this project: https://github.com/Abhishek-More/ByteSize
 Backend for this project: https://github.com/NitroGuy10/ByteSizeBackend
+Devpost (CHECK THIS OUT!!!!!) : https://devpost.com/software/bytesize?ref_content=my-projects-tab&ref_feature=my_projects
