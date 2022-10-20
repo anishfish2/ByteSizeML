@@ -17,3 +17,7 @@
 8. Create a folder called "figure" which contains the folders "video_files" and "videos" as well as your text file
 
 9. Run "inference.py" and an .mp4 file should appeaer in the "videos" folder for you to play
+
+
+Frontend for this project: https://github.com/Abhishek-More/ByteSize
+Backend for this project: https://github.com/NitroGuy10/ByteSizeBackend
