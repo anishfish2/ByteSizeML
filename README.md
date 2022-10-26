@@ -1,5 +1,7 @@
 # ByteSizeML
 
+Devpost (CHECK THIS OUT!!!!!) : https://devpost.com/software/bytesize?ref_content=my-projects-tab&ref_feature=my_projects
+
 1. Download/Clone repo
 
 2. If you know how to and want to make a venv, make a venv
@@ -21,4 +23,4 @@
 
 Frontend for this project: https://github.com/Abhishek-More/ByteSize
 Backend for this project: https://github.com/NitroGuy10/ByteSizeBackend
-Devpost (CHECK THIS OUT!!!!!) : https://devpost.com/software/bytesize?ref_content=my-projects-tab&ref_feature=my_projects
+
